@@ -45,10 +45,17 @@ export class ItemService {
   }
 
   private validateItemDTO(item: ItemDTO): void {
-    if (!('name' in item) || !('price' in item) || !('discount' in item))
+    if (!('name' in item) || !('price' in item) || !('discount' in item)) {
       throw new BadRequestException('Some field is missing');
-    if (item.name.length === 0) throw new BadRequestException('Item name cannot be empty');
-    if (item.price <= 0) throw new BadRequestException('Price cannot be negative');
-    if (item.discount < 0 || item.discount > 100) throw new BadRequestException('Discount must be within 0-100');
+    }
+    if (item.name.length === 0) {
+      throw new BadRequestException('Item name cannot be empty');
+    }
+    if (item.price <= 0) {
+      throw new BadRequestException('Price cannot be negative');
+    }
+    if (item.discount < 0 || item.discount > 100) {
+      throw new BadRequestException('Discount must be within 0-100');
+    }
   }
 }
