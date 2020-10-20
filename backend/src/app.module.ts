@@ -3,13 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { ItemModule } from './item/item.module';
-import { TypegooseModule } from 'nestjs-typegoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypegooseModule.forRoot(process.env.MONGO_URL, {
-      useNewUrlParser: true,
+    TypeOrmModule.forRoot({
+      type: "sqlite",
+      database: "./localdb.sqlite",
+      entities: [__dirname + "/**/*.entity{.ts,.js}"],
+      synchronize: process.env.NODE_ENV !== "production"
     }),
     ItemModule,
   ],

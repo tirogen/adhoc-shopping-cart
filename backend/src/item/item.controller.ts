@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Item } from './item.model';
+import { Item } from '../entities/item.entity';
+import { ItemDTO } from './item.dto';
 import { ItemService } from './item.service';
 
 @ApiTags('Item')
@@ -9,17 +10,27 @@ export class ItemController {
   constructor(private readonly service: ItemService) {}
 
   @Get()
-  findAll(): Promise<Item[]> {
+  async findAll(): Promise<Item[]> {
     return this.service.find();
   }
 
   @Get(':id')
-  findById(@Param('id') id: string): Promise<Item> {
+  async findById(@Param('id') id: string): Promise<Item> {
     return this.service.findById(id);
   }
 
   @Post()
-  addItem(@Body() item: Item) {
+  async addItem(@Body() item: ItemDTO): Promise<Item> {
     return this.service.addItem(item);
+  }
+
+  @Put(':id')
+  async updateItem(@Param('id') id: string, @Body() item: ItemDTO): Promise<Item> {
+    return this.service.updateItem(id, item);
+  }
+
+  @Delete(':id')
+  async deleteItem(@Param('id') id: string): Promise<boolean> {
+    return this.service.deleteItem(id);
   }
 }

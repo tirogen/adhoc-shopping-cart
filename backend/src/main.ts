@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
-    .setTitle('QR backend')
+    .setTitle('Shopping Cart backend')
     .setVersion('1.0')
     .addTag('QR')
     .build();

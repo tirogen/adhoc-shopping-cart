@@ -1,17 +1,12 @@
 import { Module } from '@nestjs/common';
-import { Item } from './item.model';
+import { Item } from '../entities/item.entity';
 import { ItemService } from './item.service';
 import { ItemController } from './item.controller';
-import { TypegooseModule } from 'nestjs-typegoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    TypegooseModule.forFeature([
-      {
-        typegooseClass: Item,
-        schemaOptions: { timestamps: true },
-      },
-    ]),
+    TypeOrmModule.forFeature([Item])
   ],
   providers: [ItemService],
   controllers: [ItemController],
