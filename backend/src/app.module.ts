@@ -12,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'sqlite',
       database: './localdb.sqlite',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: process.env.NODE_ENV !== 'production',
+      synchronize: true,
     }),
     ItemModule,
   ],
