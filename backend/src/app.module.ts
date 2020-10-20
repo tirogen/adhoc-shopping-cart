@@ -9,10 +9,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
-      type: "sqlite",
-      database: "./localdb.sqlite",
-      entities: [__dirname + "/**/*.entity{.ts,.js}"],
-      synchronize: process.env.NODE_ENV !== "production"
+      type: 'sqlite',
+      database: './localdb.sqlite',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: process.env.NODE_ENV !== 'production',
     }),
     ItemModule,
   ],

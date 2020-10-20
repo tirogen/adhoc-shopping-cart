@@ -1,20 +1,20 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from '@nestjs/swagger';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Item {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   name: string;
 
-  @Column("double")
+  @Column('double')
   price: number;
 
-  @Column("double")
+  @Column('double')
   discount: number;
 
-  @Column("double")
+  @Column('double')
   finalPrice: number;
 }
