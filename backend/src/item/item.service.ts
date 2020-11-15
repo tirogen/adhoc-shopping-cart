@@ -15,7 +15,7 @@ export class ItemService {
     return this.repository.find();
   }
 
-  async findById(id: string): Promise<Item> {
+  async findById(id: number): Promise<Item> {
     return this.repository.findOne(id);
   }
 
@@ -30,7 +30,7 @@ export class ItemService {
     return this.repository.save(newItem);
   }
 
-  async updateItem(id: string, itemDto: ItemDTO): Promise<Item> {
+  async updateItem(id: number, itemDto: ItemDTO): Promise<Item> {
     const item: Item = await this.repository.findOne(id);
     item.name = itemDto.name;
     item.price = itemDto.price;
@@ -39,7 +39,7 @@ export class ItemService {
     return this.repository.save(item);
   }
 
-  async deleteItem(id: string): Promise<boolean> {
+  async deleteItem(id: number): Promise<boolean> {
     await this.repository.delete({ id });
     return true;
   }
