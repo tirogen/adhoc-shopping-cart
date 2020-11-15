@@ -3,14 +3,17 @@ import QrReader from 'react-qr-reader';
 import close from './close.png';
 import { useHistory } from 'react-router-dom';
 import './App.css';
+import axios from 'axios';
 
 function Scan() {
-	const [result, setResult] = useState('');
+	const [shop, setShop] = useState(null);
 	const history = useHistory();
 
-	const handleScan = (data) => {
-		if (data) {
-			setResult(data);
+	const handleScan = async (id) => {
+		if (id) {
+			const { data } = await axios(`http://172.20.1.3:3000/item/${id}`);
+			console.log(data);
+			setShop(data);
 		}
 	};
 
@@ -20,11 +23,13 @@ function Scan() {
 
 	return (
 		<div>
-			{result !== '' ? (
+			{shop !== null ? (
 				<div className="dialog">
-					<h2>Heinz Ketchup</h2>
-					<p>Price: 150 Baht</p>
-					<p>Discount: 10% (135 Baht)</p>
+					<h2>{shop.name}</h2>
+					<p>Price: {shop.price} Baht</p>
+					<p>
+						Discount: {shop.discount}% ({shop.finalPrice} Baht)
+					</p>
 					<button className="ok-button" onClick={() => history.push('/')}>
 						OK
 					</button>
@@ -32,12 +37,7 @@ function Scan() {
 			) : (
 				''
 			)}
-			<img
-				src={close}
-				className="close"
-				alt="close button"
-				onClick={() => history.push('/')}
-			/>
+			<img src={close} className="close" alt="close button" onClick={() => history.push('/')} />
 			<QrReader
 				delay={300}
 				onError={handleError}
